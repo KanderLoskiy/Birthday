@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>С днём рождения!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            background:  pink;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            color: #fff;
+        }
+        
+        .snowflakes {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            justify-items: center;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .window {
+            position: absolute;
+            background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(245,245,245,0.95));
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) skew(-2deg);
+            width: 70%;
+            height: 70%;
+            z-index: 1;
+            border-radius: 12px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            overflow: hidden;
+        }
+        
+        .window::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff7eb3, #ff758c, #ff7eb3);
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #ff7eb3, #ff758c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 20px;
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .blur-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 0;
+            border-radius: 12px;
+        }
+        
+        .accent {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,117,140,0.3) 0%, rgba(255,117,140,0) 70%);
+            z-index: 1;
+        }
+        
+        .accent:nth-child(1) {
+            top: -50px;
+            left: -50px;
+        }
+        
+        .accent:nth-child(2) {
+            bottom: -80px;
+            right: -30px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(127,183,255,0.3) 0%, rgba(127,183,255,0) 70%);
+        }
+        
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            animation: fall 10s linear infinite;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            z-index: 0;
+            filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
+        }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(-200px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(140vh);
+                opacity: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .window {
+                width: 85%;
+                height: 50%;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    </style>
+</head>
+<body>
+    <div class="snowflakes">
+        <div class="window">
+            <div class="accent"></div>
+            <div class="accent"></div>
+            <div class="blur-effect"></div>
+            <div class="content">
+                <h1>С днём рождения!</h1>
+                <p>Поздравляю с днём рождения! <br> Желаю, чтобы вся жизнь была полна радости, счастья, здоровья, улыбок, любви и приятных сюрпризов!
+                    <br> Пусть удача станет неотъемлемым спутником, а во всех начинаниях всегда сопутствует только успех!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var foto = [
+            "url('Шар 1.png')", 
+            "url('Шар 2.png')", 
+            "url('Шар 3.png')", 
+            "url('Шар 4.png')"
+        ];
+
+        function spaun() {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.style.backgroundImage = foto[Math.floor(Math.random() * 4)];
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            const size = 5 + Math.random() * 50;
+            snowflake.style.width = size + 'vw';
+            snowflake.style.height = size + 'vw';
+            snowflake.style.animationDuration = (Math.random() * 3 + 7) + 's';
+            document.querySelector('.snowflakes').appendChild(snowflake);
+            setTimeout(() => {
+                if (snowflake.parentNode) {
+                    snowflake.parentNode.removeChild(snowflake);
+                }
+            }, 7000);
+        }
+        setInterval(spaun, 400);
+    </script>
+</body>
+</html>
